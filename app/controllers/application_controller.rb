@@ -1,13 +1,10 @@
 class ApplicationController < ActionController::API
 
-  helper_method :current_user
-
 private
 
   def current_user
     @user ||= User.find_by(api_token: params[:api_token])
   end
-
 
   def logged_in?
     current_user
@@ -19,7 +16,7 @@ private
 
   def require_login
      if logged_out?
-       render json: ["You must logged in"], status: :forbidden
+       render json: ["You must be logged in"], status: :forbidden
      end
   end
 

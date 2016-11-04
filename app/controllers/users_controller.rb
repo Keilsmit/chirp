@@ -1,13 +1,14 @@
 class UsersController < ApplicationController
 
+before_action :require_login, only: [:my_posts]
 
   def signin
     @user = User.find_by(email: params[:email]).try(:authenticate, params[:password])
-    if @user
-      render json: @user
-    else
-      render json: ["Credentials did not match"], status: :unauthenticate
-    end
+      if @user.present?
+        render json: @user
+      else
+        render json: ["User not found"]
+      end
   end
 
 
@@ -21,10 +22,23 @@ class UsersController < ApplicationController
   end
 
 
+
+  def follow
+    current_user.toggle_follow!(User.find(params[:id]))
+    render json: current_user
+  end
+
+  def my_posts
+    @posts = current_user.posts
+    render json: @posts
+  end
+
+
+
   private
 
    def user_params
-     params.permit(:email, :password, :avatar)
+     params.permit(:email, :password, :avatar, :name)
    end
 
 

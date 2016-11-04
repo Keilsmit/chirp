@@ -4,40 +4,37 @@ before_action :require_login, only: [:new, :create]
 
   def index
     if current_user
-      @posts = Post.timeline(current_user).order(created_at: :desc)
+      @posts = Post.timeline(current_user)
     else
-      
+      @posts = Post.all
     end
+    render json: @posts
   end
 
   def show
     @post = Post.find(params[:id])
-  end
-
-  def new
-    @post = Post.new
+    render json: @post
   end
 
 
-  def create(post_params)
-    @post = Post.new(post_params)
-    @post.user = current_user
-    if @post.save!
-      redirect_to root_path
-    else
-      render :new
-    end
+
+  def create
+      @post = Post.new(post_params)
+      @post.user = current_user
+      if @post.save
+        render json: @post
+      else
+        render json: @user.errors.full_messages, status: 422
+      end
   end
 
-  def body
-    @post = Post.find(params[:id])
-  end
+
 
 
 private
 
 def post_params
-  params.require(:post).permit(:body)
+  params.require(:post).permit(:body, :user_id)
 end
 
 end
