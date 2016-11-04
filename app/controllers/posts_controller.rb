@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 
-before_action :require_login, only: [:new, :create, :index]
+before_action :require_login, only: [:new, :create]
 
   def index
     if current_user
