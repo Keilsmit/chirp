@@ -35,7 +35,7 @@ before_action :require_login, only: [:my_posts]
   end
 
   def my_posts
-    @posts = current_user.posts
+    @posts = current_user.posts.order("created_at DESC")
     render json: @posts
   end
 
