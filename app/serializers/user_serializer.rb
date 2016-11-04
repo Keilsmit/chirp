@@ -9,4 +9,9 @@ class UserSerializer < ActiveModel::Serializer
       false
     end
   end
+
+
+  def avatar
+    Refile.attachment_url(object, :avatar, :fit, 100, 100, format: "jpg")
+  end
 end
