@@ -8,7 +8,7 @@ before_action :require_login, only: [:new, :create]
     else
       @posts = Post.all
     end
-    render json: @posts
+    render json: @posts, scope: current_user, scope_name: :current_user
   end
 
   def show

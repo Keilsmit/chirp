@@ -2,10 +2,10 @@ Rails.application.routes.draw do
   resources :posts
 
   scope '/api' do
+    post '/signup'=> 'users#create'
+    post '/login' => 'users#signin'
     resources :posts
     resources :users do
-      post '/login' => 'users#signin'
-      post '/signup'=> 'users#create'
       collection do
         get :my_posts
       end

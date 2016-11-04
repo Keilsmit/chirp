@@ -17,6 +17,8 @@ gem "socialization"
 gem 'faker'
 gem 'active_model_serializers', '~> 0.10.0'
 
+gem 'rails_12factor', group: :production
+
 gem 'sinatra', github: 'sinatra/sinatra'
 gem "refile", require: "refile/rails", github: 'refile/refile'
 gem "refile-mini_magick"

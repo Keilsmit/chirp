@@ -2,6 +2,12 @@ class UsersController < ApplicationController
 
 before_action :require_login, only: [:my_posts]
 
+
+  def show
+    @user
+
+  end
+
   def signin
     @user = User.find_by(email: params[:email]).try(:authenticate, params[:password])
       if @user.present?
