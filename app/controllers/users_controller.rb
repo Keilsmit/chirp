@@ -5,7 +5,7 @@ before_action :require_login, only: [:my_posts]
 
   def all
     @user = User.all
-    render json: @user
+    render json: @user, scope: current_user, scope_name: :current_user
   end
 
   def signin
