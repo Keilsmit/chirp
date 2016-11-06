@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :email, :name, :api_token, :avatar, :following
+  attributes :id, :email, :name, :api_token, :avatar, :following, :current_user
 
 
   def following
