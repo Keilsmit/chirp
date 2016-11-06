@@ -3,9 +3,9 @@ class UsersController < ApplicationController
 before_action :require_login, only: [:my_posts]
 
 
-  def show
-    @user
-
+  def all
+    @user = User.all
+    render json: @user
   end
 
   def signin
@@ -37,6 +37,11 @@ before_action :require_login, only: [:my_posts]
   def my_posts
     @posts = current_user.posts.order("created_at DESC")
     render json: @posts
+  end
+
+  def followees
+    @followees = current_user.followees(User)
+    render json: @followees
   end
 
 
