@@ -3,7 +3,7 @@ class ApplicationController < ActionController::API
 private
 
   def current_user
-    @user ||= User.find_by(api_token: params[:api_token])
+    @current_user ||= User.find_by(api_token: params[:api_token])
   end
 
   def logged_in?
