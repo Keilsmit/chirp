@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :posts
 
   scope '/api' do
-    post '/api/users/:id/unfollow' => 'users#follow'
+    post '/users/:id/unfollow' => 'users#follow'
     get '/all' => 'users#all'
     post '/signup'=> 'users#create'
     post '/login' => 'users#signin'
