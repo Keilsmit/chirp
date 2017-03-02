@@ -7,7 +7,7 @@ class Post < ApplicationRecord
 
   def self.timeline(user)
    following_ids = user.followees(User).pluck(:id)
-   all_ids= following_ids << user.id
+   all_ids = following_ids << user.id
    where(user_id: all_ids).order("created_at DESC")
   end
 
